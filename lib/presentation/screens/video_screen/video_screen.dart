@@ -68,6 +68,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 Dimensions.D_2 *
                                 Dimensions.D_1,
                             child: VideoWidget(
+                                bloc: bloc,
                                 img: state.thumbnailImg,
                                 video: state.video,
                                 asp_ratio: state.video!.value.aspectRatio),

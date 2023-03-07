@@ -9,6 +9,10 @@ class FetchVideo extends GetVideo {
 
 class Closed extends GetVideo {}
 
+class Scrolling extends GetVideo {}
+
+class GetVideoList extends GetVideo {}
+
 class Play extends GetVideo {}
 
 class Pause extends GetVideo {}

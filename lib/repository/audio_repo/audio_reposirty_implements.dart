@@ -1,4 +1,4 @@
-// ignore_for_file: use_rethrow_when_possible, unused_local_variable, unused_import, prefer_typing_uninitialized_variables, prefer_const_constructors, unrelated_type_equality_checks
+// ignore_for_file: use_rethrow_when_possible, unused_local_variable, unused_import, prefer_typing_uninitialized_variables, prefer_const_constructors, unrelated_type_equality_checks, prefer_final_fields
 
 import 'dart:async';
 import 'dart:io';
@@ -11,7 +11,7 @@ import 'package:task009/helper/constants/string_helper.dart';
 import 'package:task009/repository/audio_repo/audio_repo_interface.dart';
 
 class AudioRepository implements AudioInterface {
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  AudioPlayer _audioPlayer = AudioPlayer();
   Duration? duration, position;
   var result;
 

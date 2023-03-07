@@ -9,12 +9,25 @@ import 'package:task009/helper/constants/color_helper.dart';
 import 'package:task009/helper/constants/icon_helper.dart';
 import 'package:task009/helper/constants/screen_percentage.dart';
 
-class PlayBtn extends StatelessWidget {
+class PlayBtn extends StatefulWidget {
   PlayBtn({Key? key, required this.bloc, required this.state})
       : super(key: key);
 
   final AudioBlocs bloc;
   AudioStates state;
+
+  @override
+  State<PlayBtn> createState() => _PlayBtnState();
+}
+
+class _PlayBtnState extends State<PlayBtn> {
+  @override
+  void dispose() {
+    widget.state.audio!.pause();
+    widget.bloc.add(Pause());
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,15 +37,15 @@ class PlayBtn extends StatelessWidget {
       child: IconButton(
           color: ColorHelper.K_white,
           onPressed: () {
-            if (state.play == true) {
-              bloc.add(Pause());
+            if (widget.state.play == true) {
+              widget.bloc.add(Pause());
             } else {
-              bloc.add(Play());
+              widget.bloc.add(Play());
             }
           },
-          icon: state.play == true
-              ? IconHelper.PLAY_ICON
-              : IconHelper.PAUSE_ICON),
+          icon: widget.state.play == true
+              ? IconHelper.PAUSE_ICON
+              : IconHelper.PLAY_ICON),
     );
   }
 }

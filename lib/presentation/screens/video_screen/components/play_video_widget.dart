@@ -36,55 +36,66 @@ class _PlayVideoWidgetState extends State<PlayVideoWidget> {
   Widget build(BuildContext context) {
     chewie = ChewieController(
         aspectRatio: widget.video!.value.aspectRatio,
-        useRootNavigator: true,
         autoPlay: true,
-        allowPlaybackSpeedChanging: true,
         looping: true,
         videoPlayerController: widget.video!);
     return Chewie(controller: chewie);
   }
 }
 
-class VideoWidget extends StatelessWidget {
-  VideoWidget({Key? key, this.asp_ratio, this.video, this.img})
+class VideoWidget extends StatefulWidget {
+  VideoWidget({Key? key, this.asp_ratio, this.video, this.img, this.bloc})
       : super(key: key);
   double? asp_ratio;
   VideoPlayerController? video;
   Uint8List? img;
+  VideoBloc? bloc;
+
+  @override
+  State<VideoWidget> createState() => _VideoWidgetState();
+}
+
+class _VideoWidgetState extends State<VideoWidget> {
+  @override
+  void dispose() {
+    widget.video!.pause();
+    widget.bloc!.add(Pause());
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<VideoBloc>(context);
     return BlocBuilder<VideoBloc, VideoStates>(
       builder: (context, state) {
         return GestureDetector(
           onTap: () {
             if (state.play == true) {
-              bloc.add(Pause());
+              widget.bloc!.add(Pause());
             } else {
-              bloc.add(Play());
+              widget.bloc!.add(Play());
             }
           },
           child: Stack(
             alignment: Alignment.center,
             children: [
               AspectRatio(
-                  aspectRatio: asp_ratio!,
+                  aspectRatio: widget.asp_ratio!,
                   child: state.play == true
-                      ? VideoPlayer(video!)
-                      : Image.memory(img!)),
+                      ? VideoPlayer(widget.video!)
+                      : Image.memory(widget.img!)),
               Positioned(
                   child: Center(
                       child: IconButton(
                           onPressed: () {
                             if (state.play == true) {
-                              bloc.add(Pause());
+                              widget.bloc!.add(Pause());
                             } else {
-                              bloc.add(Play());
+                              widget.bloc!.add(Play());
                             }
                           },
                           icon: state.play == true
                               ? IconHelper.PLAY_ICON1
-                              : IconHelper.PAUSE_ICON)))
+                              : IconHelper.PLAY_ICON)))
             ],
           ),
         );

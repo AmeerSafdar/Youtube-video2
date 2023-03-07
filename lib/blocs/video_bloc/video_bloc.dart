@@ -15,11 +15,21 @@ class VideoBloc extends Bloc<GetVideo, VideoStates> {
   GetVideoRepo getVideRepo = GetVideoRepo();
   VideoPlayerController? video;
   Uint8List? thumbImg;
+  List<VideoPlayerController> controllers = [];
 
   VideoBloc({required this.getVideRepo}) : super(VideoStates()) {
     on<FetchVideo>(_fetchVideo);
     on<Play>(_play);
     on<Pause>(_pause);
+    on<Scrolling>(_getVideos);
+  }
+  void _getVideos(Scrolling event, Emitter<VideoStates> emit) async {
+    try {
+      // getVideRepo.videoList();
+      emit(state.copyWith(isScroll: true));
+    } catch (exc) {
+      throw exc;
+    }
   }
 
   void _play(Play event, Emitter<VideoStates> emit) {

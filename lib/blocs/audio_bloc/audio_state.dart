@@ -8,8 +8,8 @@ class AudioStates {
       this.duration,
       this.position,
       this.play});
-  final AudioPlayer? audio;
-  final Duration? duration;
+  AudioPlayer? audio;
+  Duration? duration;
   Duration? position;
   bool? play;
   bool? isDenied;

@@ -45,6 +45,7 @@ class _AudioScreenState extends State<AudioScreen> {
   @override
   void dispose() {
     timer!.cancel();
+    // BlocProvider.of<AudioBlocs>(context).add(Pause());
     super.dispose();
   }
 
