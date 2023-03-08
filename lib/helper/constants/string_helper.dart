@@ -20,6 +20,7 @@ class StringHelper {
   static String OPEN = 'Open app settings ?';
   static String NO_FILE = 'No file selected';
   static String NO_VIDEO = 'No Video file selected';
+  static String VIDEO_INITIALIZING = 'Videos are initializing...';
   static String PICK_VIDEO_FILE = 'Pick from video screen';
   static String MP3 = 'mp3';
 }

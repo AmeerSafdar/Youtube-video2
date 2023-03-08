@@ -7,6 +7,7 @@ class VideoStates {
       this.controll,
       this.isScroll,
       this.thumbnailImg,
+      this.imgLists,
       this.play,
       this.isDenied,
       this.isPermanentDenied});
@@ -17,14 +18,17 @@ class VideoStates {
   bool? isScroll;
   bool? isPermanentDenied;
   List<VideoPlayerController>? controll;
-  VideoStates copyWith(
-      {VideoPlayerController? video,
-      List<VideoPlayerController>? controll,
-      Uint8List? thumbnailImg,
-      bool? play,
-      bool? isScroll,
-      bool? isDenied,
-      bool? isPermanentDenied}) {
+  List<Uint8List>? imgLists;
+  VideoStates copyWith({
+    VideoPlayerController? video,
+    List<VideoPlayerController>? controll,
+    List<Uint8List>? imgLists,
+    Uint8List? thumbnailImg,
+    bool? play,
+    bool? isScroll,
+    bool? isDenied,
+    bool? isPermanentDenied,
+  }) {
     return VideoStates(
         video: video ?? this.video,
         thumbnailImg: thumbnailImg ?? this.thumbnailImg,
@@ -32,6 +36,7 @@ class VideoStates {
         play: play ?? this.play,
         isDenied: isDenied ?? this.isDenied,
         controll: controll ?? this.controll,
+        imgLists: imgLists ?? this.imgLists,
         isPermanentDenied: isPermanentDenied ?? this.isPermanentDenied);
   }
 }

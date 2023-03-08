@@ -7,5 +7,5 @@ abstract class GetVideo {
   void play();
   void pause();
   Future<Uint8List?> getThumbNail();
-  void videoList();
+  Future<List> videoList();
 }

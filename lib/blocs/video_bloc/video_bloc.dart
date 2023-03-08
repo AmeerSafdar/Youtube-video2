@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, await_only_futures, use_build_context_synchronously, use_rethrow_when_possible
+// ignore_for_file: prefer_const_constructors, await_only_futures, use_build_context_synchronously, use_rethrow_when_possible, avoid_print
 
 import 'dart:async';
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ class VideoBloc extends Bloc<GetVideo, VideoStates> {
   GetVideoRepo getVideRepo = GetVideoRepo();
   VideoPlayerController? video;
   Uint8List? thumbImg;
-  List<VideoPlayerController> controllers = [];
+  List controllers = [];
 
   VideoBloc({required this.getVideRepo}) : super(VideoStates()) {
     on<FetchVideo>(_fetchVideo);
@@ -25,15 +25,22 @@ class VideoBloc extends Bloc<GetVideo, VideoStates> {
   }
   void _getVideos(Scrolling event, Emitter<VideoStates> emit) async {
     try {
-      // getVideRepo.videoList();
-      emit(state.copyWith(isScroll: true));
+      if (controllers.isEmpty) {
+        controllers = await getVideRepo.videoList();
+        emit(state.copyWith(
+            isScroll: true,
+            controll: controllers.elementAt(0),
+            imgLists: controllers.elementAt(1)));
+      } else {
+        emit(state.copyWith(isScroll: true));
+      }
     } catch (exc) {
-      throw exc;
+      print("error:$exc");
     }
   }
 
   void _play(Play event, Emitter<VideoStates> emit) {
-    getVideRepo.play();
+    // getVideRepo.play();
     emit(state.copyWith(
       play: true,
     ));
