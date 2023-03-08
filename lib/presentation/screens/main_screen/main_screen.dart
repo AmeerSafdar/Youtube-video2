@@ -75,13 +75,13 @@ class _MainScreensState extends State<MainScreens> {
                   scrollDirection: Axis.vertical,
                   itemBuilder: ((context, index) {
                     return Container(
-                      height: vHeight,
-                      width: double.infinity,
                       child: Column(
                         children: [
                           Stack(
                             children: [
                               Container(
+                                height: vHeight,
+                                width: double.infinity,
                                 color: ColorHelper.K_black,
                                 child: Container(
                                   child: VideoPlayers(
@@ -91,7 +91,7 @@ class _MainScreensState extends State<MainScreens> {
                                               offset >=
                                                   (vHeight * index) -
                                                       (SizeConfig.screenHeight -
-                                                          2 * vHeight),
+                                                          1.3 * vHeight),
                                       key: ObjectKey(state.controll![index]),
                                       video: state.controll![index]),
                                 ),
