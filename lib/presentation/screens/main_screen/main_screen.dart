@@ -91,7 +91,7 @@ class _MainScreensState extends State<MainScreens> {
                                               offset >=
                                                   (vHeight * index) -
                                                       (SizeConfig.screenHeight -
-                                                          1.3 * vHeight),
+                                                          3 * vHeight),
                                       key: ObjectKey(state.controll![index]),
                                       video: state.controll![index]),
                                 ),

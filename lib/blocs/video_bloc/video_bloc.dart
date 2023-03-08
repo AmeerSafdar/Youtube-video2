@@ -40,7 +40,7 @@ class VideoBloc extends Bloc<GetVideo, VideoStates> {
   }
 
   void _play(Play event, Emitter<VideoStates> emit) {
-    // getVideRepo.play();
+    getVideRepo.play();
     emit(state.copyWith(
       play: true,
     ));
