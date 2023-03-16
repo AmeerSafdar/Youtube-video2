@@ -27,7 +27,7 @@ class MainScreens extends StatefulWidget {
 class _MainScreensState extends State<MainScreens> {
   final ScrollController controller = ScrollController();
   double offset = 0.0;
-  double vHeight = SizeConfig.screenHeight * ScreenPercentage.SCREEN_SIZE_30;
+  double vHeight = SizeConfig.screenHeight * ScreenPercentage.SCREEN_SIZE_25;
 
   @override
   void initState() {
@@ -40,8 +40,9 @@ class _MainScreensState extends State<MainScreens> {
   _scrollListener() {
     // if (mounted) {
     offset = controller.offset;
-    BlocProvider.of<VideoBloc>(context).add(Play());
-    // BlocProvider.of<VideoBloc>(context).add(Scrolling());
+    // BlocProvider.of<VideoBloc>(context).add(Play());
+    BlocProvider.of<VideoBloc>(context).add(Scrolling());
+    print("offset $offset");
     // }
   }
 
@@ -86,12 +87,12 @@ class _MainScreensState extends State<MainScreens> {
                                 child: Container(
                                   child: VideoPlayers(
                                       img: state.imgLists![index],
-                                      isPositioned:
-                                          offset <= (vHeight * index) &&
-                                              offset >=
-                                                  (vHeight * index) -
-                                                      (SizeConfig.screenHeight -
-                                                          3 * vHeight),
+                                      isPositioned: offset <=
+                                              (vHeight * index) &&
+                                          offset >=
+                                              (vHeight * index) -
+                                                  ((SizeConfig.screenHeight -
+                                                      2.9 * vHeight)),
                                       key: ObjectKey(state.controll![index]),
                                       video: state.controll![index]),
                                 ),
